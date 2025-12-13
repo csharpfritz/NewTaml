@@ -425,6 +425,133 @@ Implementations should provide clear error messages:
 
 `text/x-taml` or `application/x-taml`
 
+### TAML Schema
+
+TAML documents can reference a schema to validate their structure. Schemas are written in TAML itself, keeping the ecosystem consistent and minimal.
+
+#### Schema Directive
+
+A TAML document references a schema using the `#schema` directive at the top of the file:
+
+```taml
+#schema	config.taml-schema	1.0
+
+application	MyApp
+version	1.0.0
+server
+	host	localhost
+	port	8080
+```
+
+The directive format is: `#schema<tab><schema-name><tab><schema-version>`
+
+#### Schema File Format
+
+A schema file is a TAML document that describes the structure of valid documents. The first line declares the schema name and version:
+
+```taml
+config.taml-schema	1.0
+
+application
+version
+author	?
+license	~?
+server
+	host
+	port
+	ssl	?
+features	[]
+environments
+	debug	?
+	log_level	?
+```
+
+#### Schema Syntax
+
+Schemas use minimal markers to describe structure:
+
+| Syntax | Meaning | Example |
+|--------|---------|---------|
+| `key` | Required leaf value | `application` |
+| `key	?` | Optional leaf value | `author	?` |
+| `key	~` | Required nullable (must be present, can be `~` or value) | `license	~` |
+| `key	~?` | Optional nullable | `license	~?` |
+| `key	[]` | Required list | `features	[]` |
+| `key	[]?` | Optional list | `tags	[]?` |
+| Object | Implicit (has children, no marker) | `server` with children |
+
+#### Schema Examples
+
+**Simple configuration schema:**
+```taml
+app-config.taml-schema	1.0
+
+name
+version
+description	?
+settings
+	timeout
+	retry_count	?
+```
+
+**Schema with lists and nullables:**
+```taml
+user-profile.taml-schema	1.0
+
+username
+email
+full_name	?
+bio	~?
+tags	[]?
+preferences
+	theme
+	notifications	?
+```
+
+**Validating the example document:**
+
+The example document from earlier could use this schema:
+
+```taml
+myapp-config.taml-schema	1.0
+
+application
+version
+author	?
+license	~?
+server
+	host
+	port
+	ssl	?
+database
+	type
+	connection
+		host
+		port
+		database
+		password	~?
+features	[]
+environments
+	development	?
+		debug	?
+		log_level	?
+	production	?
+		debug	?
+		log_level	?
+```
+
+#### Schema Validation Rules
+
+A TAML document is valid against a schema if:
+
+1. All required keys are present
+2. No unexpected keys appear (unless schema allows them)
+3. Keys marked with `[]` have list values (indented items)
+4. Keys marked with `~` can have null values (`~`)
+5. Keys without markers have leaf values (no children)
+6. Keys with children in the schema have objects in the document
+7. Optional keys (marked `?`) may be absent
+
 ---
 
 *TAML: Because sometimes less markup is more.*
