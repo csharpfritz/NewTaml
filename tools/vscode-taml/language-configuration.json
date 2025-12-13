@@ -1,0 +1,16 @@
+{
+  "comments": {
+    "lineComment": "#"
+  },
+  "brackets": [],
+  "autoClosingPairs": [],
+  "surroundingPairs": [],
+  "folding": {
+    "offSide": true
+  },
+  "indentationRules": {
+    "increaseIndentPattern": "^.*:$",
+    "decreaseIndentPattern": "^\\s*$"
+  },
+  "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\s\\t]+)"
+}
