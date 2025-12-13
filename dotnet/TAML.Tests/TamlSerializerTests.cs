@@ -704,6 +704,139 @@ public class TamlSerializerTests
     
     #endregion
     
+    #region Comment Tests
+    
+    [Fact]
+    public void GivenTamlWithLeadingHashComment_WhenDeserializing_ThenCommentIsIgnored()
+    {
+        // Given - line starting with # is a comment
+        var taml = "# This is a comment\nName\tJohn\nAge\t30";
+        
+        // When
+        var result = TamlSerializer.Deserialize<SimpleObject>(taml);
+        
+        // Then
+        Assert.NotNull(result);
+        Assert.Equal("John", result.Name);
+        Assert.Equal(30, result.Age);
+    }
+    
+    [Fact]
+    public void GivenTamlWithMidLineHash_WhenDeserializing_ThenHashIsTreatedAsLiteral()
+    {
+        // Given - # in the middle of a value is NOT a comment
+        var taml = "Name\tJohn # Smith\nAge\t30";
+        
+        // When
+        var result = TamlSerializer.Deserialize<SimpleObject>(taml);
+        
+        // Then
+        Assert.NotNull(result);
+        Assert.Equal("John # Smith", result.Name); // Hash should be part of the value
+        Assert.Equal(30, result.Age);
+    }
+    
+    [Fact]
+    public void GivenObjectWithHashInValue_WhenSerializing_ThenHashIsPreserved()
+    {
+        // Given
+        var obj = new SimpleObject
+        {
+            Name = "User#123",
+            Age = 25,
+            IsActive = true
+        };
+        
+        // When
+        var result = TamlSerializer.Serialize(obj);
+        
+        // Then
+        Assert.Contains("Name\tUser#123\n", result);
+    }
+    
+    [Fact]
+    public void GivenObjectWithHashInValue_WhenRoundTripping_ThenHashIsPreserved()
+    {
+        // Given
+        var original = new SimpleObject
+        {
+            Name = "Channel#456",
+            Age = 42,
+            IsActive = true
+        };
+        
+        // When
+        var serialized = TamlSerializer.Serialize(original);
+        var deserialized = TamlSerializer.Deserialize<SimpleObject>(serialized);
+        
+        // Then
+        Assert.NotNull(deserialized);
+        Assert.Equal("Channel#456", deserialized.Name);
+        Assert.Equal(42, deserialized.Age);
+    }
+    
+    [Fact]
+    public void GivenTamlWithMultipleCommentLines_WhenDeserializing_ThenAllCommentsIgnored()
+    {
+        // Given
+        var taml = @"# Comment 1
+Name	Alice
+# Comment 2
+Age	30
+# Comment 3
+IsActive	true
+# Final comment";
+        
+        // When
+        var result = TamlSerializer.Deserialize<SimpleObject>(taml);
+        
+        // Then
+        Assert.NotNull(result);
+        Assert.Equal("Alice", result.Name);
+        Assert.Equal(30, result.Age);
+        Assert.True(result.IsActive);
+    }
+    
+    [Fact]
+    public void GivenTamlWithIndentedComment_WhenDeserializing_ThenCommentIsIgnored()
+    {
+        // Given - Comments at any indentation level (after TrimStart) should be ignored
+        var taml = "# Comment at start\nName\tAlice\nAge\t30\n# Comment in middle\nIsActive\ttrue";
+        
+        // When
+        var result = TamlSerializer.Deserialize<SimpleObject>(taml);
+        
+        // Then
+        Assert.NotNull(result);
+        Assert.Equal("Alice", result.Name);
+        Assert.Equal(30, result.Age);
+        Assert.True(result.IsActive);
+    }
+    
+    [Fact]
+    public void GivenValueStartingWithHash_WhenRoundTripping_ThenValueIsPreserved()
+    {
+        // Given - value that starts with # but has other content before it on the line
+        var original = new SimpleObject
+        {
+            Name = "#hashtag",
+            Age = 99,
+            IsActive = false
+        };
+        
+        // When
+        var serialized = TamlSerializer.Serialize(original);
+        var deserialized = TamlSerializer.Deserialize<SimpleObject>(serialized);
+        
+        // Then - the value should be preserved (not treated as comment because key comes first)
+        Assert.NotNull(deserialized);
+        Assert.Equal("#hashtag", deserialized.Name);
+        Assert.Equal(99, deserialized.Age);
+        Assert.False(deserialized.IsActive);
+    }
+    
+    #endregion
+    
     #region Test Helper Classes
     
     private class SimpleObject
