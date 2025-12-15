@@ -12,12 +12,12 @@
 //! use taml::parse;
 //! 
 //! let taml_text = r#"
-//! application	MyApp
-//! version	1.0.0
+//! application    MyApp
+//! version    1.0.0
 //! 
 //! server
-//! 	host	localhost
-//! 	port	8080
+//!     host    localhost
+//!     port    8080
 //! "#;
 //! 
 //! let data = parse(taml_text).unwrap();

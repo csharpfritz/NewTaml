@@ -4,16 +4,10 @@ use crate::constants::{EMPTY_STRING, NULL_VALUE, TAB};
 use crate::value::Value;
 
 /// Options for serializing TAML
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct SerializeOptions {
     /// Starting indentation level
     pub indent_level: usize,
-}
-
-impl Default for SerializeOptions {
-    fn default() -> Self {
-        Self { indent_level: 0 }
-    }
 }
 
 /// Serialize a Value to TAML format

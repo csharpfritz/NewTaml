@@ -50,7 +50,7 @@ pub fn validate(text: &str) -> Vec<ValidationError> {
         }
 
         // Check for space indentation
-        if !line.is_empty() && line.chars().next() == Some(' ') {
+        if line.starts_with(' ') {
             errors.push(ValidationError {
                 line: line_num,
                 error_type: ErrorType::SpaceIndentation,
@@ -61,27 +61,15 @@ pub fn validate(text: &str) -> Vec<ValidationError> {
 
         // Check for mixed tabs and spaces
         let mut level = 0;
-        let mut has_space = false;
         for ch in line.chars() {
             if ch == TAB {
-                if has_space {
-                    errors.push(ValidationError {
-                        line: line_num,
-                        error_type: ErrorType::MixedIndent,
-                        message: "Mixed spaces and tabs in indentation".to_string(),
-                    });
-                    break;
-                }
                 level += 1;
             } else if ch == ' ' {
-                if !has_space {
-                    has_space = true;
-                    errors.push(ValidationError {
-                        line: line_num,
-                        error_type: ErrorType::MixedIndent,
-                        message: "Mixed spaces and tabs in indentation".to_string(),
-                    });
-                }
+                errors.push(ValidationError {
+                    line: line_num,
+                    error_type: ErrorType::MixedIndent,
+                    message: "Mixed spaces and tabs in indentation".to_string(),
+                });
                 break;
             } else {
                 break;

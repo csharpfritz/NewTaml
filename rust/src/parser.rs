@@ -54,7 +54,7 @@ pub fn parse_with_options(text: &str, options: ParseOptions) -> TAMLResult<Value
         }
 
         // Check for space indentation
-        if !line.is_empty() && line.chars().next() == Some(' ') {
+        if line.starts_with(' ') {
             if options.strict {
                 return Err(TAMLError::with_line(
                     "Indentation must use tabs, not spaces",
@@ -181,9 +181,9 @@ fn build_tree(
             if !has_key_value && all_values_only && children_start < children_end {
                 // It's an array
                 let mut arr = Vec::new();
-                for k in children_start..children_end {
-                    if entries[k].level == child_level {
-                        arr.push(Value::String(entries[k].key.clone()));
+                for entry in entries.iter().take(children_end).skip(children_start) {
+                    if entry.level == child_level {
+                        arr.push(Value::String(entry.key.clone()));
                     }
                 }
                 result.insert(entry.key.clone(), Value::Array(arr));
