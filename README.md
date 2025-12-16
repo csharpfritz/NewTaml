@@ -1,4 +1,4 @@
-# TAML - Tab Accessible Markup Language
+# TAML - Tab Annotated Markup Language
 
 **The simplest hierarchical data format ever created. Just tabs and newlines. That's it.**
 
