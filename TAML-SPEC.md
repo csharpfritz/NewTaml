@@ -1,5 +1,5 @@
 # TAML Specification v0.1
-## Tab Accessible Markup Language
+## Tab Annotated Markup Language
 
 ### Overview
 TAML is a minimalist hierarchical data serialization format that uses only tabs and newlines for structure. It's designed to be simpler and more accessible than YAML while maintaining human readability.
