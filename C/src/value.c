@@ -139,6 +139,11 @@ taml_error_t taml_object_set(taml_value_t *obj, const char *key, taml_value_t *v
     if (!new_pair) return TAML_ERROR_MEMORY;
     
     new_pair->key = strdup(key);
+    if (!new_pair->key) {
+        free(new_pair);
+        return TAML_ERROR_MEMORY;
+    }
+    
     new_pair->value = value;
     new_pair->next = obj->data.object_val->pairs;
     obj->data.object_val->pairs = new_pair;

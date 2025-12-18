@@ -50,9 +50,12 @@ static char* escape_json_string(const char *str) {
 }
 
 /* Convert TAML value to JSON string */
+/* Note: This is a basic implementation with fixed buffer size.
+ * For production use, consider using a dynamic string builder. */
 static char* value_to_json(const taml_value_t *value, int indent) {
     if (!value) return strdup("null");
     
+    /* Fixed buffer - adequate for small to medium objects */
     char *result = NULL;
     size_t size = BUFFER_SIZE;
     result = (char*)malloc(size);
@@ -204,11 +207,22 @@ static taml_value_t* json_parse_value(const char **json) {
     
     /* Parse number */
     if (isdigit(**json) || **json == '-') {
+        const char *start = *json;
         char *end;
         double d = strtod(*json, &end);
+        
+        /* Check if the parsed number contains a decimal point */
+        bool has_dot = false;
+        for (const char *p = start; p < end; p++) {
+            if (*p == '.') {
+                has_dot = true;
+                break;
+            }
+        }
+        
         *json = end;
         
-        if (strchr(*json - (end - *json), '.')) {
+        if (has_dot) {
             return taml_create_float(d);
         } else {
             return taml_create_int((long long)d);
