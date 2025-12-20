@@ -16,7 +16,7 @@ infrastructure
 		us-east-1a
 		us-east-1b
 		us-east-1c
-	
+
 	compute
 		web_servers
 			instance_type	t3.medium
@@ -26,7 +26,7 @@ infrastructure
 				min			3
 				max			10
 				target_cpu	70
-		
+
 		api_servers
 			instance_type	t3.large
 			count			3
@@ -35,7 +35,7 @@ infrastructure
 				min			2
 				max			8
 				target_cpu	75
-	
+
 	storage
 		database
 			engine			postgres
@@ -45,7 +45,7 @@ infrastructure
 			backup
 				enabled			true
 				retention_days	7
-		
+
 		cache
 			engine		redis
 			version		7.0
@@ -57,7 +57,7 @@ config
 		base_url		https://api.techstore.com
 		timeout_ms		5000
 		retry_attempts	3
-		
+
 	authentication
 		jwt
 			enabled		true
@@ -73,7 +73,7 @@ config
 					client_id		github-id-456
 					client_secret	~
 					enabled			true
-	
+
 	payment
 		processors
 			stripe
@@ -83,7 +83,7 @@ config
 			paypal
 				enabled		false
 				client_id	~
-	
+
 	email
 		provider		sendgrid
 		api_key			~
@@ -102,17 +102,17 @@ observability
 			console
 			file
 			elasticsearch
-	
+
 	metrics
 		enabled		true
 		provider	datadog
 		api_key		~
-		
+
 	tracing
 		enabled		true
 		provider	jaeger
 		endpoint	http://jaeger:14268/api/traces
-	
+
 	alerting
 		pagerduty
 			enabled			true
