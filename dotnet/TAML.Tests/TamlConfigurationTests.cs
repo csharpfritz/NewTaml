@@ -237,8 +237,9 @@ public class TamlConfigurationTests
 	public void GivenTamlConfigurationWithListOfObjects_WhenLoadingConfiguration_ThenValuesAreAccessible()
 	{
 		// Given
-		// TAML format for arrays of objects - use nested structure
-		var tamlContent = "ServerConfig\n\tServers\n\t\tHost\tserver1.example.com\n\t\tPort\t8080\n\t\tHost\tserver2.example.com\n\t\tPort\t8081";
+		// TAML doesn't support lists of objects with duplicate keys.
+		// Instead, use explicit numeric keys to represent indexed items.
+		var tamlContent = "ServerConfig\n\tServers\n\t\t0\n\t\t\tHost\tserver1.example.com\n\t\t\tPort\t8080\n\t\t1\n\t\t\tHost\tserver2.example.com\n\t\t\tPort\t8081";
 		using var tempFile = new TempTamlFile(tamlContent);
 		
 		// When
@@ -247,8 +248,10 @@ public class TamlConfigurationTests
 		var config = builder.Build();
 		
 		// Then - check that values are accessible through configuration
-		Assert.NotNull(config["ServerConfig:Servers:0:Host"]);
-		Assert.NotNull(config["ServerConfig:Servers:0:Port"]);
+		Assert.Equal("server1.example.com", config["ServerConfig:Servers:0:Host"]);
+		Assert.Equal("8080", config["ServerConfig:Servers:0:Port"]);
+		Assert.Equal("server2.example.com", config["ServerConfig:Servers:1:Host"]);
+		Assert.Equal("8081", config["ServerConfig:Servers:1:Port"]);
 	}
 	
 	#endregion
