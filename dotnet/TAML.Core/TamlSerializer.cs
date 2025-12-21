@@ -9,9 +9,6 @@ public class TamlSerializer
     private const char Tab = '\t';
     private const char NewLine = '\n';
     
-    [ThreadStatic]
-    private static Dictionary<int, int>? _sameIndentCountCache;
-    
     /// <summary>
     /// Serializes an object to TAML format and returns a string
     /// </summary>
@@ -237,15 +234,7 @@ public class TamlSerializer
             return default;
         
         var lines = ParseLines(taml);
-        _sameIndentCountCache = new Dictionary<int, int>();
-        try
-        {
-            return (T?)DeserializeFromLines(typeof(T), lines, 0, out _);
-        }
-        finally
-        {
-            _sameIndentCountCache = null;
-        }
+        return (T?)DeserializeFromLines(typeof(T), lines, 0, out _);
     }
     
     /// <summary>
@@ -260,15 +249,7 @@ public class TamlSerializer
             return null;
         
         var lines = ParseLines(taml);
-        _sameIndentCountCache = new Dictionary<int, int>();
-        try
-        {
-            return DeserializeFromLines(targetType, lines, 0, out _);
-        }
-        finally
-        {
-            _sameIndentCountCache = null;
-        }
+        return DeserializeFromLines(targetType, lines, 0, out _);
     }
     
     /// <summary>
@@ -694,36 +675,34 @@ public class TamlSerializer
                         else
                         {
                             // Could be a list of primitives or nested objects
-                            // Check if there are multiple items at the same level
-                            int sameIndentCount;
+                            // Check if any items at this level have children (nested content)
+                            // If they do, it's a dictionary; otherwise it's a list
+                            bool hasChildren = false;
+                            int itemsChecked = 0;
+                            const int maxItemsToCheck = 100; // Limit scan depth for performance
                             
-                            // Use cached count if available
-                            if (_sameIndentCountCache != null && _sameIndentCountCache.TryGetValue(nextIndex, out sameIndentCount))
+                            for (int i = nextIndex; i < lines.Count && lines[i].IndentLevel >= nextLine.IndentLevel; i++)
                             {
-                                // Count already cached, use it
-                            }
-                            else
-                            {
-                                // Calculate and cache the count
-                                sameIndentCount = 0;
-                                for (int i = nextIndex; i < lines.Count && lines[i].IndentLevel >= nextLine.IndentLevel; i++)
+                                if (lines[i].IndentLevel == nextLine.IndentLevel)
                                 {
-                                    if (lines[i].IndentLevel == nextLine.IndentLevel)
-                                        sameIndentCount++;
-                                    if (sameIndentCount > 1)
+                                    // Check if this item has children (next line is deeper)
+                                    if (i + 1 < lines.Count && lines[i + 1].IndentLevel > lines[i].IndentLevel)
+                                    {
+                                        hasChildren = true;
+                                        break;
+                                    }
+                                    
+                                    // Limit scan depth to avoid checking thousands of items
+                                    if (++itemsChecked >= maxItemsToCheck)
                                         break;
                                 }
-                                
-                                if (_sameIndentCountCache != null)
-                                {
-                                    _sameIndentCountCache[nextIndex] = sameIndentCount;
-                                }
                             }
                             
-                            // Multiple items at same level = list; otherwise a single nested dictionary
-                            actualType = sameIndentCount > 1
-                                ? typeof(List<object?>)
-                                : typeof(Dictionary<string, object?>);
+                            // If any item has children, it's a dictionary with nested objects
+                            // Otherwise it's a list of simple values
+                            actualType = hasChildren
+                                ? typeof(Dictionary<string, object?>)
+                                : typeof(List<object?>);
                         }
                     }
                     
