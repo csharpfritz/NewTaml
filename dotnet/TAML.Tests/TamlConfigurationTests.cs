@@ -280,7 +280,7 @@ public class TamlConfigurationTests
 	public void GivenNonExistentFile_WhenLoadingConfiguration_ThenConfigurationIsEmpty()
 	{
 		// Given
-		var nonExistentFile = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString() + ".taml");
+		var nonExistentFile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.taml");
 		
 		// When
 		var builder = new ConfigurationBuilder();
