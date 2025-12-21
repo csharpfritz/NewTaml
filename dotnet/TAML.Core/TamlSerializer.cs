@@ -601,15 +601,13 @@ public class TamlSerializer
             }
         }
         
-        foreach (var iface in type.GetInterfaces())
+        foreach (var iface in type.GetInterfaces()
+            .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDictionary<,>)))
         {
-            if (iface.IsGenericType && iface.GetGenericTypeDefinition() == typeof(IDictionary<,>))
-            {
-                var args = iface.GetGenericArguments();
-                keyType = args[0];
-                valueType = args[1];
-                return true;
-            }
+            var args = iface.GetGenericArguments();
+            keyType = args[0];
+            valueType = args[1];
+            return true;
         }
         
         return false;
@@ -687,16 +685,10 @@ public class TamlSerializer
                                     break;
                             }
                             
-                            if (sameIndentCount > 1)
-                            {
-                                // Multiple items at same level = list
-                                actualType = typeof(List<object?>);
-                            }
-                            else
-                            {
-                                // Single item, likely a nested dictionary
-                                actualType = typeof(Dictionary<string, object?>);
-                            }
+                            // Multiple items at same level = list; otherwise a single nested dictionary
+                            actualType = sameIndentCount > 1
+                                ? typeof(List<object?>)
+                                : typeof(Dictionary<string, object?>);
                         }
                     }
                     
