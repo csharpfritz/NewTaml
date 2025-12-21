@@ -486,6 +486,9 @@ Features
 	/// </summary>
 	private sealed class TempTamlFile : IDisposable
 	{
+		/// <summary>
+		/// Gets the file path of the temporary TAML file.
+		/// </summary>
 		public string Path { get; }
 		
 		public TempTamlFile(string content)
@@ -503,9 +506,13 @@ Features
 					File.Delete(Path);
 				}
 			}
-			catch
+			catch (IOException)
 			{
-				// Suppress exceptions during cleanup to avoid masking test failures
+				// Suppress IO exceptions during cleanup to avoid masking test failures
+			}
+			catch (UnauthorizedAccessException)
+			{
+				// Suppress access exceptions during cleanup to avoid masking test failures
 			}
 		}
 	}
