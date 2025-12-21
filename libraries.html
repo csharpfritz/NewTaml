@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TAML libraries, parsers, and tools for various programming languages and platforms.">
+    <title>Libraries & Tools - TAML</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>TAML</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="libraries.html" class="active">Libraries</a></li>
+                    <li><a href="https://github.com/csharpfritz/Taml" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Libraries & Tools</h1>
+                <p>Integrate TAML into your projects with parsers, serializers, and development tools</p>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <article>
+                    <div class="intro">
+                        <p>The TAML ecosystem is growing with implementations across multiple programming languages and platforms. Each library provides parsing and serialization capabilities to integrate TAML into your projects.</p>
+                    </div>
+
+                    <h2>Available Libraries</h2>
+
+                    <div class="library-list">
+                        <div class="library-item">
+                            <div class="library-header">
+                                <h3>.NET / C#</h3>
+                                <span class="status-badge">Available</span>
+                            </div>
+                            <p>Full-featured TAML parser and serializer for .NET applications, including configuration provider support.</p>
+                            <div class="library-features">
+                                <h4>Features:</h4>
+                                <ul>
+                                    <li>Parse TAML files to .NET objects</li>
+                                    <li>Serialize .NET objects to TAML</li>
+                                    <li>.NET Configuration provider integration</li>
+                                    <li>Full validation and error reporting</li>
+                                </ul>
+                            </div>
+                            <div class="library-links">
+                                <a href="https://github.com/csharpfritz/Taml/tree/feature-dotnet-configuration" class="btn btn-sm">View Source</a>
+                                <a href="https://github.com/csharpfritz/Taml/tree/copilot/enhance-dotnet-serializer" class="btn btn-sm btn-secondary">Enhancements Branch</a>
+                            </div>
+                        </div>
+
+                        <div class="library-item">
+                            <div class="library-header">
+                                <h3>Rust</h3>
+                                <span class="status-badge status-dev">In Development</span>
+                            </div>
+                            <p>High-performance TAML parser implementation for Rust with zero-copy parsing capabilities.</p>
+                            <div class="library-features">
+                                <h4>Features:</h4>
+                                <ul>
+                                    <li>Fast, memory-efficient parsing</li>
+                                    <li>Serde integration</li>
+                                    <li>Comprehensive error handling</li>
+                                    <li>Zero-copy where possible</li>
+                                </ul>
+                            </div>
+                            <div class="library-links">
+                                <a href="https://github.com/csharpfritz/Taml/tree/copilot/add-rust-library-for-taml" class="btn btn-sm">View Source</a>
+                            </div>
+                        </div>
+
+                        <div class="library-item">
+                            <div class="library-header">
+                                <h3>JavaScript / TypeScript</h3>
+                                <span class="status-badge status-planned">Planned</span>
+                            </div>
+                            <p>Parser and serializer for Node.js and browser environments.</p>
+                            <div class="library-features">
+                                <h4>Planned Features:</h4>
+                                <ul>
+                                    <li>Parse TAML to JavaScript objects</li>
+                                    <li>Serialize JavaScript objects to TAML</li>
+                                    <li>TypeScript definitions</li>
+                                    <li>Browser and Node.js support</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="library-item">
+                            <div class="library-header">
+                                <h3>Python</h3>
+                                <span class="status-badge status-planned">Planned</span>
+                            </div>
+                            <p>Python library for TAML parsing and serialization.</p>
+                            <div class="library-features">
+                                <h4>Planned Features:</h4>
+                                <ul>
+                                    <li>Parse TAML to Python dicts/lists</li>
+                                    <li>Serialize Python objects to TAML</li>
+                                    <li>Type hints support</li>
+                                    <li>Integration with dataclasses</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 id="vscode">Development Tools</h2>
+
+                    <div class="tools-list">
+                        <div class="tool-item">
+                            <div class="tool-header">
+                                <h3>Visual Studio Code Extension</h3>
+                                <span class="status-badge status-planned">Coming Soon</span>
+                            </div>
+                            <p>Enhance your TAML editing experience in VS Code with syntax highlighting, validation, and more.</p>
+                            <div class="tool-features">
+                                <h4>Features:</h4>
+                                <ul>
+                                    <li>Syntax highlighting for .taml files</li>
+                                    <li>Real-time validation and error detection</li>
+                                    <li>IntelliSense and auto-completion</li>
+                                    <li>Formatting and indentation support</li>
+                                    <li>Schema validation support</li>
+                                </ul>
+                            </div>
+                            <div class="tool-links">
+                                <p><em>Extension will be available on the VS Code Marketplace soon.</em></p>
+                            </div>
+                        </div>
+
+                        <div class="tool-item">
+                            <div class="tool-header">
+                                <h3>Schema Validation</h3>
+                                <span class="status-badge status-dev">In Development</span>
+                            </div>
+                            <p>Define and validate TAML documents against schemas for stricter data validation.</p>
+                            <div class="tool-links">
+                                <a href="https://github.com/csharpfritz/Taml/tree/feature-schema" class="btn btn-sm">View Source</a>
+                            </div>
+                        </div>
+
+                        <div class="tool-item">
+                            <div class="tool-header">
+                                <h3>Online Parser & Validator</h3>
+                                <span class="status-badge status-planned">Planned</span>
+                            </div>
+                            <p>Web-based tool to validate and visualize TAML documents.</p>
+                            <div class="tool-features">
+                                <h4>Planned Features:</h4>
+                                <ul>
+                                    <li>Parse TAML in your browser</li>
+                                    <li>Validate TAML syntax</li>
+                                    <li>View parsed structure as JSON</li>
+                                    <li>Format and beautify TAML</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>Repository Structure</h2>
+                    <p>All TAML implementations and tools are available in our GitHub repository across different branches:</p>
+                    <ul>
+                        <li><strong>main</strong> - Core specification and documentation</li>
+                        <li><strong>feature-dotnet-configuration</strong> - .NET library and configuration provider</li>
+                        <li><strong>copilot/add-rust-library-for-taml</strong> - Rust implementation</li>
+                        <li><strong>feature-schema</strong> - Schema validation support</li>
+                        <li><strong>copilot/enhance-dotnet-serializer</strong> - Enhanced .NET serialization</li>
+                    </ul>
+
+                    <div class="cta-section">
+                        <h2>Contributing</h2>
+                        <p>Want to contribute a library in your favorite language or improve existing ones? We welcome contributions!</p>
+                        <a href="https://github.com/csharpfritz/Taml" class="btn btn-primary">Contribute on GitHub</a>
+                    </div>
+
+                    <h2>Installation & Usage</h2>
+                    <p>For installation instructions and usage examples for each library, please visit the respective branch in our GitHub repository. Each implementation includes:</p>
+                    <ul>
+                        <li>Installation/setup instructions</li>
+                        <li>API documentation</li>
+                        <li>Code examples</li>
+                        <li>Testing information</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 TAML Project. Released under the <a href="https://github.com/csharpfritz/Taml/blob/main/LICENSE">MIT License</a>.</p>
+            <p><a href="https://github.com/csharpfritz/Taml">GitHub Repository</a></p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TAML - Tab Accessible Markup Language. The simplest hierarchical data format using only tabs and newlines.">
+    <title>TAML - Tab Accessible Markup Language</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>TAML</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="libraries.html">Libraries</a></li>
+                    <li><a href="https://github.com/csharpfritz/NewTaml" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Tab Accessible Markup Language</h1>
+                <p class="tagline">The simplest hierarchical data format ever created. Just tabs and newlines. That's it.</p>
+                <div class="cta-buttons">
+                    <a href="documentation.html" class="btn btn-primary">Get Started</a>
+                    <a href="https://github.com/csharpfritz/Taml" class="btn btn-secondary" target="_blank">View on GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2>Why TAML?</h2>
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>🎯 Minimal Markup</h3>
+                        <p>Only tabs and newlines—no brackets, braces, colons, quotes, or hyphens</p>
+                    </div>
+                    <div class="feature">
+                        <h3>📐 Tab-Based Hierarchy</h3>
+                        <p>Indentation defines structure; tabs separate keys from values</p>
+                    </div>
+                    <div class="feature">
+                        <h3>👀 Visual Clarity</h3>
+                        <p>Structure is immediately visible and keyboard-navigable</p>
+                    </div>
+                    <div class="feature">
+                        <h3>🧠 Simple Mental Model</h3>
+                        <p>One tab = one level deeper</p>
+                    </div>
+                    <div class="feature">
+                        <h3>📏 Flexible Alignment</h3>
+                        <p>Use as many tabs as you want between keys and values to align them in columns</p>
+                    </div>
+                    <div class="feature">
+                        <h3>⚡ Easy to Write</h3>
+                        <p>Less typing, less thinking about syntax</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="example">
+            <div class="container">
+                <h2>Quick Example</h2>
+                <pre><code>application		MyApp
+version			1.0.0
+author			Developer Name
+
+server
+	host	0.0.0.0
+	port	8080
+	ssl		true
+
+database
+	type	postgresql
+	connection
+		host		db.example.com
+		port		5432
+		database	myapp_db
+
+features
+	user-authentication
+	api-gateway
+	logging</code></pre>
+            </div>
+        </section>
+
+        <section class="get-started">
+            <div class="container">
+                <h2>Get Started with TAML</h2>
+                <div class="getting-started-grid">
+                    <div class="gs-item">
+                        <h3>Read the Specification</h3>
+                        <p>Learn about TAML's syntax, semantics, and design principles</p>
+                        <a href="documentation.html">Read Docs →</a>
+                    </div>
+                    <div class="gs-item">
+                        <h3>Use a Library</h3>
+                        <p>Integrate TAML into your projects with our parsers and serializers</p>
+                        <a href="libraries.html">Browse Libraries →</a>
+                    </div>
+                    <div class="gs-item">
+                        <h3>VS Code Extension</h3>
+                        <p>Get syntax highlighting and validation for TAML files</p>
+                        <a href="libraries.html#vscode">Get Extension →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 TAML Project. Released under the <a href="https://github.com/csharpfritz/Taml/blob/main/LICENSE">MIT License</a>.</p>
+            <p><a href="https://github.com/csharpfritz/Taml">GitHub Repository</a></p>
+        </div>
+    </footer>
+</body>
+</html>

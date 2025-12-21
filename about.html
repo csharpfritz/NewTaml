@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about TAML - its design philosophy, goals, and how it simplifies data serialization.">
+    <title>About TAML - Tab Accessible Markup Language</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>TAML</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="libraries.html">Libraries</a></li>
+                    <li><a href="https://github.com/csharpfritz/Taml" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>About TAML</h1>
+                <p>Understanding the philosophy and design behind Tab Accessible Markup Language</p>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <article>
+                    <h2>What is TAML?</h2>
+                    <p>TAML (Tab Accessible Markup Language) is a minimalist hierarchical data serialization format designed for maximum human readability and machine parseability. It uses exclusively tab characters and newlines for structural demarcation, eliminating the need for brackets, braces, colons, quotes (except for empty strings), or other markup symbols.</p>
+
+                    <h2>Design Philosophy</h2>
+                    <p>What started as a playful jab at YAML's complexity has grown into something meaningful. After iterating on the spec and building parsers, we realized something: simplicity isn't just elegant—it's powerful. TAML eliminates the cognitive overhead of remembering complex markup rules. Tabs do all the work.</p>
+
+                    <h3>Core Principles</h3>
+                    <ul>
+                        <li><strong>Extreme Minimalism:</strong> Use only the essential characters needed to represent structure</li>
+                        <li><strong>Visual Clarity:</strong> Structure should be immediately apparent to the human eye</li>
+                        <li><strong>Keyboard Accessibility:</strong> Navigate and understand documents using only the keyboard</li>
+                        <li><strong>Zero Ambiguity:</strong> Syntax rules should be simple and unambiguous</li>
+                        <li><strong>Easy to Learn:</strong> If you can press Tab, you can write TAML</li>
+                    </ul>
+
+                    <h2>Design Goals</h2>
+                    <div class="goals">
+                        <div class="goal">
+                            <h3>Human Readability</h3>
+                            <p>TAML documents are designed to be read and written by humans without specialized tools. The tab-based structure makes hierarchy immediately visible.</p>
+                        </div>
+                        <div class="goal">
+                            <h3>Machine Parseability</h3>
+                            <p>Despite its simplicity, TAML is fully machine-parseable with clear, unambiguous rules for interpretation.</p>
+                        </div>
+                        <div class="goal">
+                            <h3>Minimal Cognitive Load</h3>
+                            <p>Eliminate the mental overhead of remembering complex syntax rules. One tab equals one level deeper—that's the whole story.</p>
+                        </div>
+                        <div class="goal">
+                            <h3>Accessibility</h3>
+                            <p>Tab-based navigation makes TAML documents accessible to users relying on keyboard navigation and screen readers.</p>
+                        </div>
+                    </div>
+
+                    <h2>Use Cases</h2>
+                    <p>TAML is ideal for:</p>
+                    <ul>
+                        <li>Configuration files</li>
+                        <li>Data serialization and interchange</li>
+                        <li>Application settings</li>
+                        <li>Simple data structures</li>
+                        <li>Human-editable data files</li>
+                        <li>Rapid prototyping</li>
+                    </ul>
+
+                    <h2>Specification Status</h2>
+                    <p>TAML is currently at version 0.1 (Draft Standard). The specification follows IEEE-style documentation standards and defines:</p>
+                    <ul>
+                        <li>Complete syntax and grammar</li>
+                        <li>Semantic interpretation rules</li>
+                        <li>Validation requirements</li>
+                        <li>Conformance criteria</li>
+                        <li>Error handling mechanisms</li>
+                    </ul>
+
+                    <h2>Comparison with Other Formats</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>TAML</th>
+                                <th>YAML</th>
+                                <th>JSON</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Special Characters</td>
+                                <td>None (except empty strings)</td>
+                                <td>Many (-, :, {, }, [, ], etc.)</td>
+                                <td>Many ({, }, [, ], :, ", etc.)</td>
+                            </tr>
+                            <tr>
+                                <td>Hierarchy Method</td>
+                                <td>Tabs only</td>
+                                <td>Spaces with strict rules</td>
+                                <td>Nested brackets</td>
+                            </tr>
+                            <tr>
+                                <td>Learning Curve</td>
+                                <td>Minimal</td>
+                                <td>Moderate</td>
+                                <td>Low-Moderate</td>
+                            </tr>
+                            <tr>
+                                <td>Human Readability</td>
+                                <td>Excellent</td>
+                                <td>Good</td>
+                                <td>Good</td>
+                            </tr>
+                            <tr>
+                                <td>Machine Parseable</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                                <td>Yes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Community and Contributions</h2>
+                    <p>TAML is an open-source project welcoming contributions from the community. Whether you're interested in:</p>
+                    <ul>
+                        <li>Implementing parsers in new languages</li>
+                        <li>Improving the specification</li>
+                        <li>Creating tools and extensions</li>
+                        <li>Writing documentation and tutorials</li>
+                    </ul>
+                    <p>We'd love to have you involved! Visit our <a href="https://github.com/csharpfritz/Taml">GitHub repository</a> to get started.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 TAML Project. Released under the <a href="https://github.com/csharpfritz/Taml/blob/main/LICENSE">MIT License</a>.</p>
+            <p><a href="https://github.com/csharpfritz/Taml">GitHub Repository</a></p>
+        </div>
+    </footer>
+</body>
+</html>

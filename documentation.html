@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete documentation and specification for TAML - Tab Accessible Markup Language.">
+    <title>Documentation - TAML</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>TAML</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="documentation.html" class="active">Documentation</a></li>
+                    <li><a href="libraries.html">Libraries</a></li>
+                    <li><a href="https://github.com/csharpfritz/Taml" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>TAML Documentation</h1>
+                <p>Learn the syntax and semantics of Tab Accessible Markup Language</p>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container">
+                <div class="doc-layout">
+                    <aside class="doc-sidebar">
+                        <nav class="doc-nav">
+                            <h3>Contents</h3>
+                            <ul>
+                                <li><a href="#basic-syntax">Basic Syntax</a></li>
+                                <li><a href="#key-value-pairs">Key-Value Pairs</a></li>
+                                <li><a href="#nested-structures">Nested Structures</a></li>
+                                <li><a href="#lists">Lists</a></li>
+                                <li><a href="#special-values">Special Values</a></li>
+                                <li><a href="#alignment">Flexible Alignment</a></li>
+                                <li><a href="#comments">Comments</a></li>
+                                <li><a href="#specification">Full Specification</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+
+                    <article class="doc-content">
+                        <section id="basic-syntax">
+                            <h2>Basic Syntax</h2>
+                            <p>TAML uses only two structural characters:</p>
+                            <ul>
+                                <li><strong>Tab character (\t)</strong> - for hierarchy and key-value separation</li>
+                                <li><strong>Newline (\n)</strong> - for separating entries</li>
+                            </ul>
+                            <p>That's it. No brackets, braces, colons, quotes, or hyphens needed.</p>
+                        </section>
+
+                        <section id="key-value-pairs">
+                            <h2>Key-Value Pairs</h2>
+                            <p>The simplest TAML structure is a key-value pair, separated by one or more tabs:</p>
+                            <pre><code>key		value
+name	John Doe
+age		30
+city	San Francisco</code></pre>
+                            <p>Keys and values are separated by at least one tab. You can use multiple tabs for alignment.</p>
+                        </section>
+
+                        <section id="nested-structures">
+                            <h2>Nested Structures</h2>
+                            <p>Create hierarchical structures by indenting with tabs. Each level of indentation represents one level deeper in the hierarchy:</p>
+                            <pre><code>server
+	host	localhost
+	port	8080
+	settings
+		timeout		30
+		retries		3
+
+database
+	type	postgresql
+	connection
+		host	db.example.com
+		port	5432</code></pre>
+                            <p>A key without a value on the same line becomes a parent object, and its children are the indented lines that follow.</p>
+                        </section>
+
+                        <section id="lists">
+                            <h2>Lists</h2>
+                            <p>Lists are represented by values at the same indentation level without keys:</p>
+                            <pre><code>features
+	authentication
+	logging
+	caching
+	monitoring</code></pre>
+                            <p>This creates an array: <code>["authentication", "logging", "caching", "monitoring"]</code></p>
+                            
+                            <h3>Lists of Objects</h3>
+                            <p>You can also have lists of nested structures:</p>
+                            <pre><code>users
+	name	Alice
+	role	admin
+	
+	name	Bob
+	role	user</code></pre>
+                        </section>
+
+                        <section id="special-values">
+                            <h2>Special Values</h2>
+                            <h3>Boolean Values</h3>
+                            <pre><code>enabled		true
+disabled	false</code></pre>
+
+                            <h3>Null Values</h3>
+                            <pre><code>optional	null</code></pre>
+
+                            <h3>Numbers</h3>
+                            <pre><code>count		42
+price		19.99
+negative	-5</code></pre>
+
+                            <h3>Empty Strings</h3>
+                            <p>Empty strings require quotes (the only time quotes are needed):</p>
+                            <pre><code>emptyField	""</code></pre>
+
+                            <h3>Multi-line Strings</h3>
+                            <p>Strings with newlines are preserved exactly as written:</p>
+                            <pre><code>description	This is a long description
+	that spans multiple lines
+	and preserves the structure</code></pre>
+                        </section>
+
+                        <section id="alignment">
+                            <h2>Flexible Alignment</h2>
+                            <p>Use multiple tabs between keys and values to create visually aligned columns:</p>
+                            <pre><code>name		John Doe
+email		john@example.com
+age			30
+city		San Francisco
+country		USA</code></pre>
+                            <p>This improves readability without affecting the data structure.</p>
+                        </section>
+
+                        <section id="comments">
+                            <h2>Comments</h2>
+                            <p>Comments start with <code>#</code> and continue to the end of the line:</p>
+                            <pre><code># This is a comment
+server
+	host	localhost	# default host
+	port	8080		# default port</code></pre>
+                        </section>
+
+                        <section id="specification">
+                            <h2>Full Specification</h2>
+                            <p>For complete technical details including:</p>
+                            <ul>
+                                <li>Formal grammar definitions</li>
+                                <li>Character encoding requirements</li>
+                                <li>Validation rules</li>
+                                <li>Conformance criteria</li>
+                                <li>Error handling</li>
+                                <li>Parser implementation guidelines</li>
+                            </ul>
+                            <p>Please refer to the <a href="https://github.com/csharpfritz/Taml/blob/main/TAML-IEEE-SPEC.md">IEEE-Style TAML Specification</a> document in our GitHub repository.</p>
+
+                            <div class="spec-links">
+                                <a href="https://github.com/csharpfritz/Taml/blob/main/TAML-IEEE-SPEC.md" class="btn btn-primary">Read Full Specification</a>
+                                <a href="https://github.com/csharpfritz/Taml/blob/main/README.md" class="btn btn-secondary">Quick Start Guide</a>
+                            </div>
+                        </section>
+
+                        <section id="examples">
+                            <h2>Complete Examples</h2>
+                            
+                            <h3>Configuration File Example</h3>
+                            <pre><code>application		MyApp
+version			1.0.0
+author			Developer Name
+
+server
+	host	0.0.0.0
+	port	8080
+	ssl		true
+	workers	4
+
+database
+	type	postgresql
+	connection
+		host		db.example.com
+		port		5432
+		database	myapp_db
+		username	dbuser
+		pool
+			min	2
+			max	10
+
+logging
+	level	info
+	outputs
+		console
+		file
+
+features
+	user-authentication
+	api-gateway
+	rate-limiting
+	monitoring</code></pre>
+                        </section>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 TAML Project. Released under the <a href="https://github.com/csharpfritz/Taml/blob/main/LICENSE">MIT License</a>.</p>
+            <p><a href="https://github.com/csharpfritz/Taml">GitHub Repository</a></p>
+        </div>
+    </footer>
+</body>
+</html>
