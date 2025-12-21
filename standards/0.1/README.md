@@ -106,7 +106,7 @@ A key with children cannot have a value on the same line. Either have a value (n
 ## Contributing
 
 When adding new test documents:
-1. Follow the naming convention: `0#-descriptive-name.taml`
+1. Follow the naming convention: `##-descriptive-name.taml`
 2. Include comments explaining what is being tested
 3. Update this README with the new test description
 4. Ensure the document is valid according to TAML v0.1 spec
