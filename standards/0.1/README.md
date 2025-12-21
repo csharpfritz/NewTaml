@@ -14,7 +14,7 @@ These documents are based on [TAML Specification v0.1](../../TAML-SPEC.md)
 Tests basic key-value pair functionality:
 - Single tab separators
 - Multiple tab separators (for alignment)
-- Various value representations (strings, numbers, booleans)
+- Various string values (may be interpreted as numbers, booleans by parsers)
 - Special values (null `~`, empty string `""`)
 
 #### 02-nested-structures.taml
