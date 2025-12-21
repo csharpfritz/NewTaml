@@ -9,12 +9,18 @@ public static class ConfigurationExtensions
 	/// Adds TAML configuration provider to the configuration builder for the standard "appsettings.taml" file.
 	/// </summary>
 	/// <param name="builder">The configuration builder</param>
-	/// <returns></returns>
+	/// <returns>The configuration builder for chaining</returns>
 	public static IConfigurationBuilder AddTamlConfiguration(this IConfigurationBuilder builder)
 	{
 		return builder.Add(new TamlConfigurationSource("appsettings.taml"));
 	}
 
+	/// <summary>
+	/// Adds TAML configuration provider to the configuration builder with a custom file path.
+	/// </summary>
+	/// <param name="builder">The configuration builder</param>
+	/// <param name="path">The path to the TAML configuration file</param>
+	/// <returns>The configuration builder for chaining</returns>
 	public static IConfigurationBuilder AddTamlConfiguration(this IConfigurationBuilder builder, string path)
 	{
 		return builder.Add(new TamlConfigurationSource(path));
