@@ -28,6 +28,9 @@
   },
   "license": "MIT",
   "main": "./client/out/extension.js",
+  "activationEvents": [
+    "onLanguage:taml"
+  ],
   "contributes": {
     "languages": [
       {
