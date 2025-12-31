@@ -24,9 +24,9 @@ dotnet restore dotnet.sln
 dotnet build dotnet.sln --configuration Release
 ```
 
-## Libraries
+## Projects
 
-This folder contains two main libraries:
+This folder contains the following projects:
 
 ### TAML.Core
 
@@ -34,8 +34,8 @@ Core parsing and serialization functionality for TAML documents.
 
 - **TamlDocument**: Main document class for working with TAML data
 - **TamlSerializer**: Low-level serialization and deserialization
-- **TamlConverter**: Type conversion utilities
-- **TamlValidator**: TAML format validation
+- **TamlConverter**: Convert between TAML, YAML, JSON, and XML formats
+- **TamlValidator**: TAML format validation with detailed error reporting
 
 ### TAML.Configuration
 
@@ -44,6 +44,24 @@ Integration with Microsoft.Extensions.Configuration for ASP.NET Core application
 - Load TAML files as configuration sources
 - Full support for the .NET configuration system
 - Drop-in replacement for JSON/XML configuration files
+
+### TAML.CLI
+
+Command-line tool for working with TAML files.
+
+- **Convert** TAML files to YAML or JSON format
+- **Validate** TAML documents with detailed error reporting
+- **Info** display file statistics and structure
+
+See [TAML.CLI/README.md](./TAML.CLI/README.md) for detailed usage instructions.
+
+```bash
+# Example: Convert TAML to YAML
+dotnet run --project TAML.CLI -- convert -i config.taml -f yaml
+
+# Example: Validate a TAML file
+dotnet run --project TAML.CLI -- validate -i config.taml -v
+```
 
 ## Usage
 

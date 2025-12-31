@@ -486,4 +486,159 @@ public class TamlConverterTests
     }
 
     #endregion
+
+    #region TAML to YAML Conversion Tests
+
+    [Fact]
+    public void ConvertToYaml_WithSimpleObject_ConvertsCorrectly()
+    {
+        // Given
+        var taml = """
+        name	John
+        age	30
+        active	true
+        """;
+
+        // When
+        var yaml = TamlConverter.ConvertToYaml(taml);
+
+        // Then
+        Assert.NotNull(yaml);
+        Assert.Contains("name: John", yaml);
+        Assert.Contains("age: 30", yaml);
+        Assert.Contains("active: true", yaml);
+    }
+
+    [Fact]
+    public void ConvertToYaml_WithNestedObject_ConvertsCorrectly()
+    {
+        // Given
+        var taml = """
+        server
+        	host	localhost
+        	port	8080
+        """;
+
+        // When
+        var yaml = TamlConverter.ConvertToYaml(taml);
+
+        // Then
+        Assert.NotNull(yaml);
+        Assert.Contains("server:", yaml);
+        Assert.Contains("host: localhost", yaml);
+        Assert.Contains("port: 8080", yaml);
+    }
+
+    [Fact]
+    public void ConvertToYaml_WithList_ConvertsCorrectly()
+    {
+        // Given
+        var taml = """
+        features
+        	auth
+        	logging
+        	caching
+        """;
+
+        // When
+        var yaml = TamlConverter.ConvertToYaml(taml);
+
+        // Then
+        Assert.NotNull(yaml);
+        Assert.Contains("features:", yaml);
+        Assert.Contains("- auth", yaml);
+        Assert.Contains("- logging", yaml);
+        Assert.Contains("- caching", yaml);
+    }
+
+    [Fact]
+    public void ConvertToYaml_WithEmptyString_ReturnsEmpty()
+    {
+        // Given
+        var taml = "";
+
+        // When
+        var yaml = TamlConverter.ConvertToYaml(taml);
+
+        // Then
+        Assert.Equal(string.Empty, yaml);
+    }
+
+    #endregion
+
+    #region TAML to JSON Conversion Tests
+
+    [Fact]
+    public void ConvertToJson_WithSimpleObject_ConvertsCorrectly()
+    {
+        // Given
+        var taml = """
+        name	John
+        city	New York
+        """;
+
+        // When
+        var json = TamlConverter.ConvertToJson(taml);
+
+        // Then
+        Assert.NotNull(json);
+        Assert.Contains("\"name\":", json);
+        Assert.Contains("\"John\"", json);
+        Assert.Contains("\"city\":", json);
+        Assert.Contains("\"New York\"", json);
+    }
+
+    [Fact]
+    public void ConvertToJson_WithNestedObject_ConvertsCorrectly()
+    {
+        // Given
+        var taml = """
+        database
+        	host	localhost
+        	port	5432
+        """;
+
+        // When
+        var json = TamlConverter.ConvertToJson(taml);
+
+        // Then
+        Assert.NotNull(json);
+        Assert.Contains("\"database\":", json);
+        Assert.Contains("\"host\":", json);
+        Assert.Contains("\"localhost\"", json);
+        Assert.Contains("\"port\":", json);
+        Assert.Contains("\"5432\"", json);
+    }
+
+    [Fact]
+    public void ConvertToJson_WithIndentedFalse_ReturnsCompactJson()
+    {
+        // Given
+        var taml = """
+        name	Test
+        value	123
+        """;
+
+        // When
+        var json = TamlConverter.ConvertToJson(taml, indented: false);
+
+        // Then
+        Assert.NotNull(json);
+        Assert.DoesNotContain("\n", json.Trim());
+    }
+
+    [Fact]
+    public void ConvertToJson_WithEmptyString_ReturnsEmpty()
+    {
+        // Given
+        var taml = "";
+
+        // When
+        var json = TamlConverter.ConvertToJson(taml);
+
+        // Then
+        Assert.Equal(string.Empty, json);
+    }
+
+    #endregion
 }
