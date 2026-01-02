@@ -10,7 +10,7 @@ TAML is a minimalist hierarchical data serialization format that uses only tabs 
 - **Minimal special characters**: Only `~` and `""` have special meanings. Brackets, braces, colons, most quotation marks, and hyphens have no special meaning. 
 - **Visual clarity**: Structure is immediately visible
 
-These TAML documents consistently use an actual tab character to represent the tab character as it is used in TAML-formatted files and snippets. It is expected that those who work with TAML, when necessary, will use text editor tools (such as Visual Studio Code's "Toggle Render Whitespace" option) to distinguish tab characters from spaces or other white-space characters. 
+These TAML documents consistently use an actual tab character to represent the tab character as used in TAML. It is expected that those who work with TAML, when necessary, will use text editor tools (such as Visual Studio Code's "Toggle Render Whitespace" option) to distinguish tab characters from spaces or other white-space characters. 
 
 ### Basic Syntax
 
