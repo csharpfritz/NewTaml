@@ -98,7 +98,10 @@ namespace Taml
     }
 
     std::string Document::Serialize(const std::unordered_map<std::string, std::any>& data) {
-        // TODO: Implement TAML serializer
-        throw std::runtime_error("Serialize not implemented yet");
+        return Serializer::Serialize(std::any(data));
+    }
+
+    std::string Document::ToString() const {
+        return Serialize(_data);
     }
 }

@@ -31,6 +31,7 @@ namespace Taml
         /// </summary>
         static std::unique_ptr<std::stringstream> SerializeToStream(const std::any& obj);
 
+
     private:
         static constexpr char Tab = '\t';
         static constexpr char NewLine = '\n';

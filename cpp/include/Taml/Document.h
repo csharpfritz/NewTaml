@@ -6,6 +6,7 @@
 #include <optional>
 #include <vector>
 #include <future>
+#include "Taml/Serializer.h"
 
 namespace Taml
 {
@@ -107,6 +108,12 @@ namespace Taml
         /// Serializes a TAML document data structure into a TAML string
         /// </summary>
         static std::string Serialize(const std::unordered_map<std::string, std::any>& data);
+
+        /// <summary>
+        /// Returns a string representation of the document
+        /// </summary>
+        std::string ToString() const;
+
 
     private:
         std::unordered_map<std::string, std::any> _data;

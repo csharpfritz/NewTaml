@@ -88,6 +88,10 @@ int main() {
     }
     std::cout << std::endl;
 
+    // Test ToString
+    std::cout << "\n=== Testing ToString ===" << std::endl;
+    std::cout << "Document as string:\n" << emptyDoc.ToString() << std::endl;
+
     // Test LoadFromFile and SaveToFile (synchronous)
     std::cout << "\n=== Testing LoadFromFile and SaveToFile ===" << std::endl;
     try {
@@ -115,6 +119,27 @@ int main() {
     // Note: Parse and Serialize are placeholders and will throw exceptions
     std::cout << "\n=== Note on Parse/Serialize ===" << std::endl;
     std::cout << "Parse and Serialize are not implemented yet and will throw exceptions if called." << std::endl;
+
+    // Test Serializer directly
+    std::cout << "\n=== Testing Serializer ===" << std::endl;
+    
+    // Test Serializer::Serialize with a simple map
+    std::unordered_map<std::string, std::any> testData;
+    testData["key1"] = std::string("value1");
+    testData["key2"] = 42;
+    std::string serialized = Taml::Serializer::Serialize(std::any(testData));
+    std::cout << "Serializer::Serialize result:\n" << serialized << std::endl;
+    
+    // Test Serializer::SerializeToStream
+    auto streamPtr = Taml::Serializer::SerializeToStream(std::any(testData));
+    std::cout << "Serializer::SerializeToStream result:\n" << streamPtr->str() << std::endl;
+    
+    // Test Serializer with Document data
+    std::cout << "\n=== Testing Serializer with Document Data ===" << std::endl;
+    std::cout << "Document data via Serializer:\n" << Taml::Serializer::Serialize(std::any(emptyDoc.Data())) << std::endl;
+    
+    // Verify that Document::ToString() uses Serializer
+    std::cout << "Document::ToString() (should match above):\n" << emptyDoc.ToString() << std::endl;
 
     std::cout << "\nAll tests completed." << std::endl;
         
