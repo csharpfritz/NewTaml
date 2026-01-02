@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Taml/Document.h"
+#include "Taml/Serializer.h"
 
 // Version information provided as macros and a helper function
 #define TAML_VERSION_MAJOR 1
