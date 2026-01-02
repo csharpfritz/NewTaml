@@ -3,6 +3,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <future>
+#include "Taml/Exception.h"
 
 namespace Taml
 {
@@ -56,12 +57,12 @@ namespace Taml
 
     Document Document::LoadFromFile(const std::string& path) {
         if (!std::filesystem::exists(path)) {
-            throw std::runtime_error("TAML file not found: " + path);
+            throw Taml::Exception("TAML file not found: " + path);
         }
 
         std::ifstream file(path);
         if (!file.is_open()) {
-            throw std::runtime_error("Failed to open file: " + path);
+            throw Taml::Exception("Failed to open file: " + path);
         }
 
         std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
@@ -80,7 +81,7 @@ namespace Taml
         std::string tamlContent = Serialize(_data);
         std::ofstream file(path);
         if (!file.is_open()) {
-            throw std::runtime_error("Failed to open file for writing: " + path);
+            throw Taml::Exception("Failed to open file for writing: " + path);
         }
         file << tamlContent;
         file.close();
@@ -94,7 +95,7 @@ namespace Taml
 
     Document Document::Parse(const std::string& content) {
         // TODO: Implement TAML parser
-        throw std::runtime_error("Parse not implemented yet");
+        throw Taml::Exception("Parse not implemented yet");
     }
 
     std::string Document::Serialize(const std::unordered_map<std::string, std::any>& data) {

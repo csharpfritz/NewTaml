@@ -1,4 +1,5 @@
 #include "Taml/Serializer.h"
+#include "Taml/Exception.h"
 
 namespace Taml
 {
@@ -28,7 +29,7 @@ namespace Taml
         // TODO: Implement TAML serialization logic
         // This is a placeholder - actual implementation would recursively serialize
         // the object structure using tabs for indentation and TAML format rules
-        sb << "TODO: SerializeObject not implemented";
+        throw Taml::Exception("SerializeObject not implemented");
     }
 
     void Serializer::SerializeComplexObject(const std::any& obj, std::stringstream& sb, int indentLevel) {
@@ -36,7 +37,7 @@ namespace Taml
         // In C++, reflection is not available like in C#, so this would need
         // custom serialization logic or external libraries for reflection
         // For now, this is a placeholder
-        sb << "TODO: SerializeComplexObject not implemented - requires reflection or custom logic";
+        throw Taml::Exception("SerializeComplexObject not implemented - requires reflection or custom logic");
     }
 
     void Serializer::SerializeMember(const std::string& name, const std::any& value, std::stringstream& sb, int indentLevel) {

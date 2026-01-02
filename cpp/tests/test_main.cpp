@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Taml.h"
+#include "Taml/Exception.h"
 
 #ifndef TAML_VERSION_MAJOR
 #error "TAML_VERSION_MAJOR not defined"
@@ -116,10 +117,6 @@ int main() {
         std::cout << "Async operation failed: " << e.what() << std::endl;
     }
 
-    // Note: Parse and Serialize are placeholders and will throw exceptions
-    std::cout << "\n=== Note on Parse/Serialize ===" << std::endl;
-    std::cout << "Parse and Serialize are not implemented yet and will throw exceptions if called." << std::endl;
-
     // Test Serializer directly
     std::cout << "\n=== Testing Serializer ===" << std::endl;
     
@@ -140,6 +137,46 @@ int main() {
     
     // Verify that Document::ToString() uses Serializer
     std::cout << "Document::ToString() (should match above):\n" << emptyDoc.ToString() << std::endl;
+
+    // Test Exception class
+    std::cout << "\n=== Testing Exception ===" << std::endl;
+    
+    // Test simple exception
+    try {
+        throw Taml::Exception("Simple error message");
+    } catch (const Taml::Exception& ex) {
+        std::cout << "Simple exception caught: " << ex.what() << std::endl;
+        std::cout << "Has Line: " << (ex.Line.has_value() ? "true" : "false") << std::endl;
+        std::cout << "Has LineText: " << (ex.LineText.has_value() ? "true" : "false") << std::endl;
+    }
+    
+    // Test exception with line number
+    try {
+        throw Taml::Exception("Error with line", 10);
+    } catch (const Taml::Exception& ex) {
+        std::cout << "Exception with line caught: " << ex.what() << std::endl;
+        std::cout << "Line: " << (ex.Line.has_value() ? std::to_string(*ex.Line) : "none") << std::endl;
+    }
+    
+    // Test exception with line number and text
+    try {
+        throw Taml::Exception("Error with line and text", 15, "invalid\tline");
+    } catch (const Taml::Exception& ex) {
+        std::cout << "Exception with line and text caught: " << ex.what() << std::endl;
+        std::cout << "Line: " << (ex.Line.has_value() ? std::to_string(*ex.Line) : "none") << std::endl;
+        std::cout << "LineText: " << (ex.LineText.has_value() ? *ex.LineText : "none") << std::endl;
+    }
+    
+    // Test exception with inner exception
+    try {
+        try {
+            throw std::runtime_error("Inner error");
+        } catch (const std::exception& inner) {
+            throw Taml::Exception("Outer error", inner);
+        }
+    } catch (const Taml::Exception& ex) {
+        std::cout << "Exception with inner caught: " << ex.what() << std::endl;
+    }
 
     std::cout << "\nAll tests completed." << std::endl;
         
