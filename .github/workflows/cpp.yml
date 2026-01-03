@@ -1,4 +1,4 @@
-name: TAML-Cpp
+name: C++ Tests
 
 on:
   push:
