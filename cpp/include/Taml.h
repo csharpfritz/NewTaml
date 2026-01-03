@@ -2,6 +2,8 @@
 
 #include "Taml/Document.h"
 #include "Taml/Serializer.h"
+#include "Taml/Exception.h"
+#include "Taml/Validator.h"
 
 // Version information provided as macros and a helper function
 #define TAML_VERSION_MAJOR 1
