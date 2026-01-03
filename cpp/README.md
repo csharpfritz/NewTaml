@@ -71,7 +71,19 @@ Note: the exact suffix ordering may vary slightly depending on CMake configurati
 
 ## Tests
 - A simple smoke test executable is included that is built when `-DTAML_BUILD_TESTS=ON`.
-- Tests are implemented without third-party frameworks so they work on fresh systems.
+- Tests do **not** use a third-party test framework (no GoogleTest/Catch2); they are a standalone executable and therefore easy to run on fresh systems.
+- **Important:** Some tests and parts of the C++ code exercise Boost integration (Boost.Describe / Boost.MP11). That means Boost headers must be available when building tests — either by configuring with `-DTAML_POPULATE_THIRD_PARTY=ON` (FetchContent fetches the needed headers at configure time) or by installing system packages (e.g., `libboost-dev` on Debian/Ubuntu, `brew install boost` on macOS, or using vcpkg on Windows).
+
+---
+
+## Third-party licenses
+
+The C++ code depends on small, header-only components from Boost. Licensing and redistribution notes:
+
+- **Boost.Describe** — *Boost Software License, Version 1.0* — http://boost.org/LICENSE_1_0.txt
+- **Boost.MP11** — *Boost Software License, Version 1.0* — http://boost.org/LICENSE_1_0.txt
+
+If you choose to **vendor** these headers (copy them into `cpp/ThirdParty` or similar), you must include the Boost Software License text and preserve any copyright/license notices. In CI we fetch these headers when you configure with `-DTAML_POPULATE_THIRD_PARTY=ON`, but if you require fully offline builds you may vendor the headers (or install system packages as a fallback).
 
 ---
 
