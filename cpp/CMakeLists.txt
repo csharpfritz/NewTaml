@@ -85,7 +85,9 @@ if(TAML_POPULATE_THIRD_PARTY)
         GIT_TAG boost-1.82.0
         SOURCE_DIR ${BOOST_MP11_DIR}
         BINARY_DIR ${BOOST_MP11_DIR}/build
-        CONFIGURE_COMMAND ""
+
+        # Ensure the build directory exists even for header-only projects
+        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${BOOST_MP11_DIR}/build
         BUILD_COMMAND ""
         INSTALL_COMMAND ""
         EXCLUDE_FROM_ALL 1
@@ -98,7 +100,9 @@ if(TAML_POPULATE_THIRD_PARTY)
         GIT_TAG boost-1.82.0
         SOURCE_DIR ${BOOST_DESCRIBE_DIR}
         BINARY_DIR ${BOOST_DESCRIBE_DIR}/build
-        CONFIGURE_COMMAND ""
+
+        # Ensure the build directory exists even for header-only projects
+        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${BOOST_DESCRIBE_DIR}/build
         BUILD_COMMAND ""
         INSTALL_COMMAND ""
         EXCLUDE_FROM_ALL 1

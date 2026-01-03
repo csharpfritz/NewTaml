@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Taml.h"
-#include "boost/describe.hpp"
 
 // Quick compile-time check that Boost.Describe is available
 struct _DescribeTest

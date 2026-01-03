@@ -6,6 +6,9 @@
 #include "Taml/Validator.h"
 #include "Taml/Converter.h"
 
+#include "Boost/describe.hpp"
+#include "Boost/mp11.hpp"
+
 // Version information provided as macros and a helper function
 #define TAML_VERSION_MAJOR 1
 #define TAML_VERSION_MINOR 0
