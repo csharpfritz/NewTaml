@@ -94,8 +94,16 @@ namespace Taml
     }
 
     Document Document::Parse(const std::string& content) {
-        // TODO: Implement TAML parser
-        // For now, return an empty document
+        auto result = Serializer::Deserialize(content, typeid(std::unordered_map<std::string, std::any>));
+        if (result.has_value()) {
+            try {
+                auto& map = std::any_cast<std::unordered_map<std::string, std::any>&>(result);
+                return Document(map);
+            } catch (const std::bad_any_cast&) {
+                // If not a map, return empty
+                return Document();
+            }
+        }
         return Document();
     }
 
