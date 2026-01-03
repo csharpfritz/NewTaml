@@ -78,40 +78,33 @@ if(TAML_POPULATE_THIRD_PARTY)
 endif()
 
 if(TAML_POPULATE_THIRD_PARTY)
-    # Use ExternalProject_Add to clone third-party sources into ThirdParty and build inside their own build folders.
-    # For header-only projects (like mp11) we skip configure/build steps; for describe we also only fetch sources to keep build simple.
-    ExternalProject_Add(boost_mp11_ep
+    # Use FetchContent to fetch header-only Boost components at configure time.
+    # This ensures headers are present during Configure and avoids build-time cd errors in ExternalProject.
+    message(STATUS "TAML_POPULATE_THIRD_PARTY=ON: fetching Boost.MP11 and Boost.Describe via FetchContent")
+
+    FetchContent_Declare(
+        boost_mp11
         GIT_REPOSITORY https://github.com/boostorg/mp11.git
         GIT_TAG boost-1.82.0
         SOURCE_DIR ${BOOST_MP11_DIR}
-        BINARY_DIR ${BOOST_MP11_DIR}/build
-
-        # Ensure the build directory exists even for header-only projects
-        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${BOOST_MP11_DIR}/build
-        BUILD_COMMAND ""
-        INSTALL_COMMAND ""
-        EXCLUDE_FROM_ALL 1
-
-        # clone during the build step
     )
 
-    ExternalProject_Add(boost_describe_ep
+    FetchContent_Declare(
+        boost_describe
         GIT_REPOSITORY https://github.com/boostorg/describe.git
         GIT_TAG boost-1.82.0
         SOURCE_DIR ${BOOST_DESCRIBE_DIR}
-        BINARY_DIR ${BOOST_DESCRIBE_DIR}/build
-
-        # Ensure the build directory exists even for header-only projects
-        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${BOOST_DESCRIBE_DIR}/build
-        BUILD_COMMAND ""
-        INSTALL_COMMAND ""
-        EXCLUDE_FROM_ALL 1
-        DEPENDS boost_mp11_ep
     )
 
-    # Make sure main targets can include the headers from the populated ThirdParty folders
-    add_custom_target(populate-thirdparty EXCLUDE_FROM_ALL DEPENDS boost_mp11_ep boost_describe_ep)
-    message(STATUS "Added ExternalProject targets boost_mp11_ep and boost_describe_ep; run 'cmake --build <builddir> --target populate-thirdparty' to fetch third-party sources")
+    # Fetch at configure time so headers are available immediately
+    FetchContent_MakeAvailable(boost_mp11)
+    FetchContent_MakeAvailable(boost_describe)
+
+    # Provide a populate-thirdparty target for backward compatibility (no-op; fetch occurs at configure)
+    add_custom_target(populate-thirdparty
+        COMMENT "ThirdParty dependencies are fetched during configure when TAML_POPULATE_THIRD_PARTY=ON"
+        VERBATIM
+    )
 endif()
 
 # Make Boost.Describe include directory directly available when building (avoid creating exportable target)
