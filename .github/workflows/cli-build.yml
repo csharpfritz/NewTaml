@@ -118,7 +118,7 @@ jobs:
       if: matrix.os_name != 'windows'
       run: |
         cd ./publish/${{ matrix.runtime }}
-        chmod +x taml
+        chmod +x TAML.CLI
         tar -czvf ../../taml-cli-${{ matrix.os_name }}-${{ matrix.arch }}.tar.gz .
     
     - name: Upload artifact
