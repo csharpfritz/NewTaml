@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAML.Tests", "TAML.Tests\TA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAML.Configuration", "TAML.Configuration\TAML.Configuration.csproj", "{FB989D73-9365-4F81-87A1-8F7B42A6EA6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAML.CLI", "TAML.CLI\TAML.CLI.csproj", "{80BDE418-7C18-4BA7-9826-5889ED8F6996}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{FB989D73-9365-4F81-87A1-8F7B42A6EA6D}.Release|x64.Build.0 = Release|Any CPU
 		{FB989D73-9365-4F81-87A1-8F7B42A6EA6D}.Release|x86.ActiveCfg = Release|Any CPU
 		{FB989D73-9365-4F81-87A1-8F7B42A6EA6D}.Release|x86.Build.0 = Release|Any CPU
+		{80BDE418-7C18-4BA7-9826-5889ED8F6996}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80BDE418-7C18-4BA7-9826-5889ED8F6996}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80BDE418-7C18-4BA7-9826-5889ED8F6996}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{80BDE418-7C18-4BA7-9826-5889ED8F6996}.Debug|x64.Build.0 = Debug|Any CPU
+		{80BDE418-7C18-4BA7-9826-5889ED8F6996}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{80BDE418-7C18-4BA7-9826-5889ED8F6996}.Debug|x86.Build.0 = Debug|Any CPU
+		{80BDE418-7C18-4BA7-9826-5889ED8F6996}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80BDE418-7C18-4BA7-9826-5889ED8F6996}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80BDE418-7C18-4BA7-9826-5889ED8F6996}.Release|x64.ActiveCfg = Release|Any CPU
+		{80BDE418-7C18-4BA7-9826-5889ED8F6996}.Release|x64.Build.0 = Release|Any CPU
+		{80BDE418-7C18-4BA7-9826-5889ED8F6996}.Release|x86.ActiveCfg = Release|Any CPU
+		{80BDE418-7C18-4BA7-9826-5889ED8F6996}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
