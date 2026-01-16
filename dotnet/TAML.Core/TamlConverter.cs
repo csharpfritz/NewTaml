@@ -76,6 +76,50 @@ public static class TamlConverter
         return TamlSerializer.Serialize(obj ?? new object());
     }
 
+    /// <summary>
+    /// Parses TAML string and converts it to YAML format
+    /// </summary>
+    /// <param name="taml">The TAML string to parse</param>
+    /// <returns>YAML formatted string</returns>
+    public static string ConvertToYaml(string taml)
+    {
+        if (string.IsNullOrWhiteSpace(taml))
+            return string.Empty;
+
+        // Parse TAML to a document
+        var document = TamlDocument.Parse(taml);
+        
+        // Convert to YAML using YamlDotNet
+        var serializer = new SerializerBuilder()
+            .WithIndentedSequences()
+            .Build();
+        
+        return serializer.Serialize(document.Data);
+    }
+
+    /// <summary>
+    /// Parses TAML string and converts it to JSON format
+    /// </summary>
+    /// <param name="taml">The TAML string to parse</param>
+    /// <param name="indented">Whether to format the JSON with indentation</param>
+    /// <returns>JSON formatted string</returns>
+    public static string ConvertToJson(string taml, bool indented = true)
+    {
+        if (string.IsNullOrWhiteSpace(taml))
+            return string.Empty;
+
+        // Parse TAML to a document
+        var document = TamlDocument.Parse(taml);
+        
+        // Convert to JSON
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = indented
+        };
+        
+        return JsonSerializer.Serialize(document.Data, options);
+    }
+
     private static object? ConvertJsonElement(JsonElement element)
     {
         switch (element.ValueKind)
